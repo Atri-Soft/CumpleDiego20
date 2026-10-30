@@ -49,6 +49,9 @@ svg.i{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke
 .ch div small{font:20px 'VT323'}.ch div.s{border-color:var(--red);color:#fff;background:rgba(229,38,47,.18);animation:bl2 .4s steps(2) 2}.ch div.s.k{border-color:var(--sky);background:rgba(111,180,240,.15)}
 @keyframes bl2{50%{background:#fff}}
 .pass{border-color:var(--red)}.stamp{display:inline-block;border:4px solid var(--red);color:var(--red);font:10px var(--px);padding:8px;transform:rotate(-4deg);margin:10px 0}
+#mapbox{position:relative;height:360px;border:4px solid var(--blue-d);background:#0b1630;overflow:hidden}#mf{width:100%;height:100%;border:0;filter:invert(.93) hue-rotate(205deg) saturate(1.5) brightness(.8) contrast(1.1)}#mapbox::after{content:"";position:absolute;inset:0;background:rgba(40,70,170,.38);mix-blend-mode:color;pointer-events:none}
+#mp{position:absolute;left:50%;top:50%;width:58px;height:58px;margin:-29px 0 0 -29px;border-radius:50%;background:#1fb85a;border:5px solid #05101f;box-shadow:0 0 0 3px #fff,0 0 24px #1fb85a;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:3;animation:pn 1.2s steps(4) infinite}
+#mp i{position:absolute;inset:-18px;border:3px solid #1fb85a;border-radius:50%;animation:pg 2s ease-out infinite}#mw{position:absolute;right:8px;bottom:8px;z-index:3;pointer-events:none}
 /* game */
 #gw{position:relative;border:4px solid #04101f;background:#04101f}#gc{width:100%;display:block;touch-action:none;image-rendering:pixelated;aspect-ratio:3/4}
 #ov{position:absolute;inset:0;background:rgba(4,10,20,.9);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;padding:14px;overflow:auto}
@@ -63,7 +66,7 @@ footer{text-align:center;color:var(--mut);font-size:17px;padding:10px 0 4px;disp
 <main id="app"></main>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
-const CONFIG={name:'DIEGO',age:20,eventDateISO:'2026-11-07T21:00:00-04:00',cover:40,mapsUrl:'https://maps.app.goo.gl/kXKxyTJz7Zar8vLb9',mapsEmbed:'Cochabamba, Bolivia',whatsappGroupUrl:'https://chat.whatsapp.com/TU_LINK_GRUPO_AQUI',diegoPhone:'591XXXXXXXX',payQrUrl:'',spotifyJamUrl:'https://open.spotify.com/',scriptUrl:'https://script.google.com/macros/s/AKfycbxGC9xZz6MLW18uzKnWHN1cBn4OS2bcC9J75BRJ0GVFqgnZIDvBXAEOpY5EE8PvjZoZ/exec',atrisoftIcon:'https://i.imgur.com/Ofcaqug.png'};
+const CONFIG={name:'DIEGO',age:20,eventDateISO:'2026-11-07T21:00:00-04:00',cover:40,mapsUrl:'https://maps.app.goo.gl/kXKxyTJz7Zar8vLb9',mapsEmbed:'Cochabamba, Bolivia'/* cambia por las coordenadas exactas de la fiesta, ej: '-17.3935,-66.1570' */,whatsappGroupUrl:'https://chat.whatsapp.com/TU_LINK_GRUPO_AQUI',diegoPhone:'591XXXXXXXX',payQrUrl:'',spotifyJamUrl:'https://open.spotify.com/',scriptUrl:'https://script.google.com/macros/s/AKfycbyNIuntV5VKJ_1VjIaM-JZ3wVNxIEmVfU5hohwn0LgS2Lp8tleuq08q3QASemKKaBor/exec',atrisoftIcon:'https://i.imgur.com/Ofcaqug.png'};
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const OK=()=>!CONFIG.scriptUrl.startsWith('PEGAR');
@@ -75,7 +78,6 @@ let lt=0;document.addEventListener('touchend',e=>{const n=Date.now();if(n-lt<300
 const ICON='<svg class="i" viewBox="0 0 24 24"><path d="M12 21V10M12 10L5 4M12 10l7-6M4 14h16M7 18h10"/></svg>';
 const isAdmin=new URLSearchParams(location.search).get('p')==='diego'||location.hash==='#diego';
 function reveal(){const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}}),{threshold:.1});$$('.rv').forEach((e,i)=>{e.style.transitionDelay=(i%3)*.07+'s';io.observe(e)})}
-if(isAdmin)admin();else guest();
 
 /* ============ INVITADOS ============ */
 let me=ls('dg'),srv={showQr:false},change=false;
@@ -88,17 +90,11 @@ $('#app').innerHTML=`
 <div class="mq"><span>${'▪ 20 AÑOS ▪ 07·NOV ▪ 21:00 HRS ▪ COCHABAMBA '.repeat(6)}</span></div></section>
 
 <section class="win rv"><div class="tt"><i></i>UBICACIÓN<i></i></div>
-<svg id="map" viewBox="0 0 320 210"><defs><pattern id="g" width="16" height="16" patternUnits="userSpaceOnUse"><path d="M16 0H0V16" fill="none" stroke="#12315e" stroke-width="1"/></pattern></defs><rect width="320" height="210" fill="#06101f"/><rect width="320" height="210" fill="url(#g)"/>
-<g class="dr" fill="none" stroke="#2f6fc9" stroke-width="3" stroke-linecap="square"><path d="M0 150H110L150 105H320"/><path d="M60 0V120L110 150V210"/><path d="M220 0V105L260 150H320"/></g><path d="M0 60H90L140 30H320" fill="none" stroke="#1a4590" stroke-width="2"/>
-<g fill="#6fb4f0"><rect x="40" y="40" width="8" height="8"/><rect x="250" y="60" width="8" height="8"/><rect x="90" y="170" width="8" height="8"/><rect x="270" y="180" width="8" height="8"/></g>
-<g class="rad"><path d="M160 105L160 10" stroke="#e5262f" stroke-width="2" opacity=".7"/></g>
-<circle class="ping" cx="160" cy="105" r="70" fill="none" stroke="#e5262f" stroke-width="3"/>
-<g class="pin"><rect x="152" y="86" width="16" height="16" fill="#e5262f" stroke="#fff" stroke-width="2"/><rect x="156" y="90" width="8" height="8" fill="#fff"/><path d="M160 102v8" stroke="#e5262f" stroke-width="3"/></g>
-<rect x="84" y="180" width="152" height="22" fill="#04101f" stroke="#2f6fc9" stroke-width="2"/><text x="160" y="195" fill="#fff" font-family="Press Start 2P" font-size="7" text-anchor="middle">DIEGO EN LA FIESTA</text></svg>
+<div id="mapbox"><iframe id="mf" title="Mapa" loading="lazy" src="https://www.google.com/maps?q=${encodeURIComponent(CONFIG.mapsEmbed)}&z=16&output=embed"></iframe><div id="mp"><i></i><svg viewBox="0 0 16 16" width="34" height="34" shape-rendering="crispEdges" fill="#05101f"><rect x="6" y="6" width="4" height="5"/><rect x="7" y="4" width="2" height="2"/><rect x="3" y="5" width="3" height="1"/><rect x="2" y="7" width="4" height="1"/><rect x="3" y="9" width="3" height="1"/><rect x="4" y="11" width="2" height="1"/><rect x="10" y="5" width="3" height="1"/><rect x="10" y="7" width="4" height="1"/><rect x="10" y="9" width="3" height="1"/><rect x="10" y="11" width="2" height="1"/></svg></div><svg id="mw" viewBox="0 0 100 100" width="84" height="84"><g fill="rgba(20,40,90,.8)" stroke="#6fb4f0" stroke-width="1.2"><polygon points="50,2 85,15 98,50 85,85 50,98 15,85 2,50 15,15"/><g fill="none"><polygon points="50,20 74,28 80,50 74,72 50,80 26,72 20,50 26,28"/><polygon points="50,36 62,40 64,50 62,60 50,64 38,60 36,50 38,40"/></g><path d="M50 2V98M2 50H98M15 15L85 85M85 15L15 85"/></g></svg></div>
 <p class="px" style="font-size:9px;margin:14px 0 4px;color:var(--sky)">Sábado 07 · 21:00 hrs</p>
 <a class="btn" href="${CONFIG.mapsUrl}" target="_blank" rel="noopener">${ICON}Abrir en Google Maps</a>
 <div id="qr"></div><p class="mut" style="text-align:center">Escanea para llegar</p>
-<button class="btn b" id="mapB">Ver mapa en vivo</button><div id="mapw"></div></section>
+</section>
 
 <section class="win rv"><div class="tt"><i></i>LA JAM<i></i></div><div class="eq">${Array.from({length:26},(_,i)=>`<i style="animation-delay:${(i*.07)%1}s;animation-duration:${.5+(i%5)*.15}s"></i>`).join('')}</div>
 <a class="btn" href="${CONFIG.spotifyJamUrl}" target="_blank" rel="noopener">Unirme a la Jam de Spotify</a><p class="mut" style="margin-top:10px">¿No puedes entrar? Escribe tu canción al confirmar y la sumamos.</p></section>
@@ -110,8 +106,7 @@ $('#app').innerHTML=`
 <footer><img src="${CONFIG.atrisoftIcon}" referrerpolicy="no-referrer" alt=""><span>Hecho por <b>Atri</b><i>Soft</i></span></footer>`;
 tick();setInterval(tick,1000);
 try{new QRCode($('#qr'),{text:CONFIG.mapsUrl,width:120,height:120})}catch(e){}
-let mo=0;$('#mapB').onclick=()=>{mo=!mo;const w=$('#mapw');if(mo&&!w.innerHTML)w.innerHTML=`<iframe loading="lazy" src="https://www.google.com/maps?q=${encodeURIComponent(CONFIG.mapsEmbed)}&output=embed"></iframe>`;w.style.maxHeight=mo?'320px':'0';$('#mapB').textContent=mo?'Ocultar mapa':'Ver mapa en vivo'};
-rsvpView();reveal();sync();$('#go').onclick=start;
+initGame();rsvpView();reveal();sync();$('#go').onclick=start;
 }
 function tick(){let d=Math.max(0,new Date(CONFIG.eventDateISO)-Date.now())/1e3;[86400,3600,60,1].forEach((u,i)=>{const v=Math.floor(d/u);d-=v*u;const e=$('#c'+i);if(e)e.textContent=String(v).padStart(2,'0')})}
 async function sync(){if(!OK())return;try{const r=await get('?action=guest'+(me?'&id='+encodeURIComponent(me.id):''));srv=r.config||srv;if(r.guest){me=Object.assign(me,r.guest);ls('dg',me)}rsvpView()}catch(e){}}
@@ -140,11 +135,11 @@ try{let r={num:Math.floor(Math.random()*90+10),cambios:0};if(OK()){r=await api({
 me=Object.assign({id,name,pagado:false},me||{},{status:sel,opcion:sel==='SI'?opt:'',num:r.num,cambios:r.cambios||0});ls('dg',me);change=false;rsvpView()}catch(e){b.disabled=false;b.textContent='Enviar';$('#fe').textContent='Sin conexión. Intenta otra vez.'}}}
 
 /* ============ JUEGO ============ */
-const gc=$('#gc'),g=gc&&gc.getContext('2d'),W=300,H=400;let G=null,best=ls('best')||0;
+let gc,g;const W=300,H=400;let G=null,best=ls('best')||0;
 function start(){if(!me||me.status!=='SI')return;best=Math.max(best,me.score||0);$('#bs').textContent='REC '+best;G={x:50,y:150,vx:3,vy:0,a:null,L:0,score:0,bonus:0,anc:[],rg:[],bm:[],ps:[],over:false,t:0};for(let i=0;i<80;i++){const x=130+i*(90+Math.min(i*1.5,40));G.anc.push({x,y:40+Math.random()*60});G.rg.push({x:x+55,y:150+Math.random()*130,h:0});if(i>1&&Math.random()<.5)G.bm.push({x:x+55,l:70+Math.random()*40+Math.min(i,40)})}$('#ov').style.display='none';requestAnimationFrame(loop)}
 const near=()=>{let b=null,d=1e9;G.anc.forEach(a=>{if(a.x>G.x-10&&a.x<G.x+170){const k=Math.hypot(a.x-G.x,a.y-G.y);if(k<d){d=k;b=a}}});return b};
 const dn=e=>{e.preventDefault();if(!G||G.over)return;const a=near();if(a){G.a=a;G.L=Math.hypot(a.x-G.x,a.y-G.y)}},up=()=>{if(G)G.a=null};
-if(gc){gc.addEventListener('pointerdown',dn);addEventListener('pointerup',up)}
+function initGame(){gc=$('#gc');g=gc.getContext('2d');gc.addEventListener('pointerdown',dn);addEventListener('pointerup',up)}
 const burst=(x,y,c)=>{for(let i=0;i<12;i++)G.ps.push({x,y,vx:(Math.random()-.5)*5,vy:(Math.random()-.5)*5,l:1,c})};
 function over(){const s=G;s.over=true;const nb=s.score>best;if(nb){best=s.score;ls('best',best);$('#bs').textContent='REC '+best}
 $('#ov').style.display='flex';$('#ov').innerHTML=`<div class="px" style="font-size:12px">${nb?'¡NUEVO RÉCORD!':'GAME OVER'}</div><div class="px" style="font-size:22px;color:var(--red)">${s.score}</div><div class="px" style="font-size:8px;color:var(--sky)">RANKING</div><div class="rk" id="rk">Cargando...</div><button class="btn" id="go">Reintentar</button>`;$('#go').onclick=start;
@@ -186,4 +181,5 @@ $$('[data-f]').forEach(b=>b.onclick=()=>{flt=b.dataset.f;draw()});
 $$('[data-p]').forEach(b=>b.onclick=async()=>{const x=G.find(y=>y.id===b.dataset.p);x.pagado=!x.pagado;draw();api({action:'setPaid',pin:PD.pin,id:x.id,pagado:x.pagado}).catch(()=>{})});
 $('#tq').onclick=()=>{PD.config.showQr=!PD.config.showQr;draw();api({action:'setQr',pin:PD.pin,value:PD.config.showQr}).catch(()=>{})};
 const nw=G.filter(x=>!x.visto).map(x=>x.id);if(nw.length)setTimeout(()=>{api({action:'markSeen',pin:PD.pin,ids:nw}).catch(()=>{})},4000)}
+if(isAdmin)admin();else guest();
 </script></body></html>
