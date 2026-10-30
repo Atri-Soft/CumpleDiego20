@@ -75,7 +75,7 @@ body::after{opacity:.3}
 .led{display:inline-block;width:9px;height:9px;border-radius:50%;background:#2be07a;box-shadow:0 0 8px #2be07a;margin-right:6px;vertical-align:middle}
 main.ctr{min-height:100svh;display:flex;align-items:center}main.ctr .win{margin:0;width:100%}
 #mapbox{height:340px}#mapbox::after{display:none}#lm{position:absolute;inset:0;z-index:0}
-.leaflet-container{background:#0b1630;font:14px 'VT323',monospace}.leaflet-tile-pane{filter:sepia(1) hue-rotate(185deg) saturate(2.4) brightness(1.25) contrast(1.05)}
+.leaflet-container{background:#0b1630;font:14px 'VT323',monospace}.leaflet-tile-pane{filter:invert(1) hue-rotate(198deg) saturate(1.3) brightness(.92) contrast(.95)}
 .leaflet-control-attribution{background:rgba(4,16,31,.8)!important;color:var(--mut)!important}.leaflet-control-attribution a{color:var(--sky)!important}
 .spin{width:50px;height:62px;position:relative}.spin b{position:absolute;left:3px;top:0;width:44px;height:44px;border-radius:50%;background:#1fb85a;border:4px solid #05101f;box-shadow:0 0 0 2px #fff;display:flex;align-items:center;justify-content:center}.spin u{position:absolute;left:14px;top:42px;border:11px solid transparent;border-top:18px solid #05101f;border-bottom:0}
 #mw{z-index:500}
@@ -99,7 +99,7 @@ main.ctr{min-height:100svh;display:flex;align-items:center}main.ctr .win{margin:
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
-const CONFIG={name:'DIEGO',age:20,eventDateISO:'2026-11-07T21:00:00-04:00',cover:40,mapsUrl:'https://maps.app.goo.gl/WDFEuesQDjE3cWj17',mapsEmbed:'Cochabamba, Bolivia'/* cambia por las coordenadas exactas de la fiesta, ej: '-17.3935,-66.1570' */,whatsappGroupUrl:'https://chat.whatsapp.com/TU_LINK_GRUPO_AQUI',diegoPhone:'591XXXXXXXX',lat:-17.364632,lng:-66.162964,gh:{owner:'Atri-Soft',repo:'CumpleDiego20',branch:'main',path:'qr-pago.png'},qrPath:'qr-pago.png',spotifyJamUrl:'https://open.spotify.com/',scriptUrl:'https://script.google.com/macros/s/AKfycbw1hNOAiSvhsXdz5kVz4o5MnmasOfHtihMoBLzsgJdwTr_v82ZchgV_bwxMAx_p9uY/exec',atrisoftIcon:'https://i.imgur.com/Ofcaqug.png'};
+const CONFIG={name:'DIEGO',age:20,eventDateISO:'2026-11-07T21:00:00-04:00',cover:40,mapsUrl:'https://maps.app.goo.gl/kXKxyTJz7Zar8vLb9',mapsEmbed:'Cochabamba, Bolivia'/* cambia por las coordenadas exactas de la fiesta, ej: '-17.3935,-66.1570' */,whatsappGroupUrl:'https://chat.whatsapp.com/TU_LINK_GRUPO_AQUI',diegoPhone:'591XXXXXXXX',lat:-17.364632,lng:-66.162964,gh:{owner:'TU_USUARIO_GITHUB',repo:'TU_REPOSITORIO',branch:'main',path:'qr-pago.png'},qrPath:'qr-pago.png',spotifyJamUrl:'https://open.spotify.com/',scriptUrl:'PEGAR_AQUI_URL_DE_GOOGLE_APPS_SCRIPT_EXEC',atrisoftIcon:'https://i.imgur.com/Ofcaqug.png'};
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const OK=()=>!CONFIG.scriptUrl.startsWith('PEGAR');
@@ -147,7 +147,7 @@ function unlock(){const on=me&&me.status==='SI';$('#gs').style.display=on?'block
 function rsvpView(){const box=$('#rs');if(!box)return;unlock();
 if(me&&me.status==='SI'&&!change){const cv=me.opcion==='COVER',left=Math.max(0,2-(me.cambios||0));
 box.innerHTML=`<div class="pass"><div class="lb">Ticket #${esc(me.num||'--')}</div><div class="px" style="font-size:14px;margin:10px 0">${esc(me.name)}</div><div class="stamp">CONFIRMADO</div>
-<p>${cv?`Cover: ${CONFIG.cover} Bs ${me.pagado?'· PAGADO':'· PENDIENTE'}`:'Yo traje: aporto con bebida o comida'}</p>
+<p>${cv?`Cover: ${CONFIG.cover} Bs ${me.pagado?'· PAGADO':'· PENDIENTE'}`:'Yo traje: llevo mi bebida'}</p>
 ${cv&&!me.pagado?`<button class="btn b" id="qb">Ver QR de pago</button><a class="btn g" href="https://wa.me/${CONFIG.diegoPhone}?text=${encodeURIComponent('Hola Diego, soy '+me.name+'. Te envío mi comprobante del cover de '+CONFIG.cover+' Bs.')}" target="_blank" rel="noopener">Enviar comprobante</a><p class="mut">Envía el comprobante al número de Diego o paga en puerta.</p>`:''}
 <a class="btn" href="${CONFIG.whatsappGroupUrl}" target="_blank" rel="noopener">Entrar al grupo de WhatsApp</a>
 ${left?`<button class="btn g" id="chg">Cambiar opción (${left} restantes)</button>`:'<p class="mut" style="margin-top:10px">Ya usaste tus 2 cambios.</p>'}</div>`;
@@ -156,29 +156,30 @@ if(me&&me.status==='NO'&&!change){box.innerHTML=`<p class="px" style="font-size:
 const editOpt=me&&me.status==='SI';let sel=editOpt?'SI':'',opt=editOpt?me.opcion:'';
 box.innerHTML=`${editOpt?'':`<label>Nombre y apellido</label><input id="fn" maxlength="60" value="${esc(me?me.name:'')}" autocomplete="name">
 <label>¿Vas a ir?</label><div class="ch"><div data-v="SI">SÍ VOY</div><div data-v="NO">NO PUEDO</div></div>`}
-<div id="op" style="display:${editOpt?'block':'none'}"><label>¿Cómo aportas?</label><div class="ch"><div data-o="COVER" class="k">COVER<small>${CONFIG.cover} Bs</small></div><div data-o="TRAIGO" class="k">YO TRAJE<small>llevo algo</small></div></div></div>
+<div id="op" style="display:${editOpt?'block':'none'}"><label>¿Cómo aportas?</label><div class="ch"><div data-o="COVER" class="k">COVER<small>${CONFIG.cover} Bs</small></div><div data-o="TRAIGO" class="k">YO TRAJE<small>llevo bebida</small></div></div></div>
 ${editOpt?'':`<label>Canción que no puede faltar</label><input id="fs" maxlength="90"><label>Mensaje para Diego</label><textarea id="fm" rows="2" maxlength="240"></textarea>`}
 <button class="btn" id="fb">${editOpt?'Guardar cambio':'Enviar'}</button><p id="fe" style="color:var(--red);margin-top:10px"></p>`;
 const pk=v=>{sel=v;$$('[data-v]').forEach(d=>d.classList.toggle('s',d.dataset.v===v));$('#op').style.display=v==='SI'?'block':'none'},po=v=>{opt=v;$$('[data-o]').forEach(d=>d.classList.toggle('s',d.dataset.o===v))};
 $$('[data-v]').forEach(d=>d.onclick=()=>pk(d.dataset.v));$$('[data-o]').forEach(d=>d.onclick=()=>po(d.dataset.o));if(opt)po(opt);
 $('#fb').onclick=async()=>{const name=editOpt?me.name:$('#fn').value.trim();if(name.length<3)return $('#fe').textContent='Escribe tu nombre y apellido.';if(!sel)return $('#fe').textContent='Elige si vas a ir.';if(sel==='SI'&&!opt)return $('#fe').textContent='Elige cómo aportas.';
-const id=(me&&me.id)||'g'+Date.now().toString(36)+Math.random().toString(36).slice(2,6);const b=$('#fb');b.disabled=true;b.textContent='Enviando...';
+const id=(me&&me.id)||ls('pid')||('g'+Date.now().toString(36)+Math.random().toString(36).slice(2,6));ls('pid',id);const b=$('#fb');b.disabled=true;b.textContent='Enviando...';
 const body={action:'rsvp',id,nombre:name,asistencia:sel,opcion:sel==='SI'?opt:'',cancion:editOpt?'':$('#fs').value.trim(),mensaje:editOpt?'':$('#fm').value.trim()};
 const pr=OK()?api(body).catch(()=>null):Promise.resolve({ok:true,num:Math.floor(Math.random()*90+10),cambios:0});
 swing(async()=>{const r=await pr;if(!r||!r.ok){b.disabled=false;b.textContent='Enviar';$('#fe').textContent=!r?'Sin conexión. Intenta otra vez.':r.error==='limite'?'Ya usaste tus 2 cambios.':'No se pudo guardar.';return}
-me=Object.assign({id,name,pagado:false},me||{},{status:sel,opcion:sel==='SI'?opt:'',num:r.num,cambios:r.cambios||0});ls('dg',me);change=false;rsvpView();if(sel==='SI'&&opt==='COVER'&&!me.pagado)setTimeout(openQr,700)},1)}}
+me=Object.assign({id,name,pagado:false},me||{},{id:r.id||id,status:sel,opcion:sel==='SI'?opt:'',num:r.num,cambios:r.cambios||0});ls('dg',me);change=false;rsvpView();if(sel==='SI'&&opt==='COVER'&&!me.pagado)setTimeout(openQr,700)},1)}}
 
 /* ============ JUEGO ============ */
 let gc,g;const W=300,H=400;let G=null,best=ls('best')||0;
-function start(){if(!me||me.status!=='SI')return;best=Math.max(best,me.score||0);$('#bs').textContent='REC '+best;G={x:50,y:150,vx:3,vy:0,a:null,L:0,score:0,bonus:0,anc:[],rg:[],bm:[],ps:[],over:false,t:0};for(let i=0;i<80;i++){const x=130+i*(90+Math.min(i*1.5,40));G.anc.push({x,y:40+Math.random()*60});G.rg.push({x:x+55,y:150+Math.random()*130,h:0});if(i>1&&Math.random()<.5)G.bm.push({x:x+55,l:70+Math.random()*40+Math.min(i,40)})}$('#ov').style.display='none';requestAnimationFrame(loop)}
+function gen(s,to){while(s.nx<to){const x=s.nx;s.anc.push({x,y:40+Math.random()*60});s.rg.push({x:x+55,y:150+Math.random()*130,h:0});if(s.n>1&&Math.random()<Math.min(.25+s.n*.01,.6))s.bm.push({x:x+55,l:70+Math.random()*40+Math.min(s.n,40)});s.n++;s.nx+=90+Math.min(s.n*1.5,40)+Math.random()*10}}
+function start(){if(!me||me.status!=='SI')return;best=Math.max(best,me.score||0);$('#bs').textContent='REC '+best;G={x:50,y:150,vx:3,vy:0,a:null,L:0,score:0,bonus:0,anc:[],rg:[],bm:[],ps:[],over:false,t:0,n:0,nx:130};gen(G,900);$('#ov').style.display='none';requestAnimationFrame(loop)}
 const near=()=>{let b=null,d=1e9;G.anc.forEach(a=>{if(a.x>G.x-10&&a.x<G.x+170){const k=Math.hypot(a.x-G.x,a.y-G.y);if(k<d){d=k;b=a}}});return b};
 const dn=e=>{e.preventDefault();if(!G||G.over)return;const a=near();if(a){G.a=a;G.L=Math.hypot(a.x-G.x,a.y-G.y)}},up=()=>{if(G)G.a=null};
 function initGame(){gc=$('#gc');g=gc.getContext('2d');gc.addEventListener('pointerdown',dn);addEventListener('pointerup',up)}
 const burst=(x,y,c)=>{for(let i=0;i<12;i++)G.ps.push({x,y,vx:(Math.random()-.5)*5,vy:(Math.random()-.5)*5,l:1,c})};
 function over(){const s=G;s.over=true;const nb=s.score>best;if(nb){best=s.score;ls('best',best);$('#bs').textContent='REC '+best}
-$('#ov').style.display='flex';$('#ov').innerHTML=`<div class="px" style="font-size:12px">${nb?'¡NUEVO RÉCORD!':'GAME OVER'}</div><div class="px" style="font-size:22px;color:var(--red)">${s.score}</div><div class="px" style="font-size:8px;color:var(--sky)">RANKING</div><div class="rk" id="rk">Cargando...</div><button class="btn" id="go">Reintentar</button>`;$('#go').onclick=start;
+$('#ov').style.display='flex';$('#ov').innerHTML=`<div class="px" style="font-size:20px;color:var(--red)">GAME OVER</div>${nb?'<div class="px" style="font-size:9px;color:#2be07a">¡NUEVO RÉCORD!</div>':''}<div class="px" style="font-size:22px;color:var(--red)">${s.score}</div><div class="px" style="font-size:8px;color:var(--sky)">RANKING</div><div class="rk" id="rk">Cargando...</div><button class="btn" id="go">Reintentar</button>`;$('#go').onclick=start;
 (async()=>{if(!OK())return $('#rk').textContent='Conecta el servidor.';try{if(nb)await api({action:'saveScore',id:me.id,score:best});const r=await get('?action=ranking');const t=r.scores.slice(0,6);$('#rk').innerHTML=t.map((x,i)=>`<div class="${x.id===me.id?'me':''}"><span>${i+1}</span><span>${esc(x.nombre)}</span><b>${x.score}</b></div>`).join('')||'Sin puntajes.';const p=r.scores.findIndex(x=>x.id===me.id);if(p>5)$('#rk').innerHTML+=`<div class="me"><span>${p+1}</span><span>${esc(me.name)}</span><b>${best}</b></div>`}catch(e){$('#rk').textContent='Ranking no disponible.'}})()}
-function loop(){const s=G;if(!s||s.over)return;s.t++;s.vy+=.26;
+function loop(){const s=G;if(!s||s.over)return;s.t++;gen(s,s.x+700);while(s.anc.length&&s.anc[0].x<s.x-300)s.anc.shift();while(s.rg.length&&s.rg[0].x<s.x-300)s.rg.shift();while(s.bm.length&&s.bm[0].x<s.x-300)s.bm.shift();s.vy+=.26;
 if(s.a){const dx=s.x-s.a.x,dy=s.y-s.a.y,d=Math.hypot(dx,dy);if(d>s.L){const nx=dx/d,ny=dy/d;s.x=s.a.x+nx*s.L;s.y=s.a.y+ny*s.L;const dt=s.vx*nx+s.vy*ny;if(dt>0){s.vx-=nx*dt;s.vy-=ny*dt}}s.vx*=1.003}else s.vx=Math.max(s.vx,2.6+Math.min(s.x/900,2));
 s.x+=s.vx;s.y+=s.vy;
 s.rg.forEach(r=>{if(!r.h&&Math.hypot(r.x-s.x,r.y-s.y)<18){r.h=1;s.bonus+=25;burst(r.x,r.y,'#e5262f');s.msg=45}});
@@ -203,7 +204,7 @@ function cls(){const m=$('#md');if(m)m.remove()}
 const qrUrl=v=>CONFIG.qrPath+'?v='+v;
 function openQr(){const v=srv.qrv;mdl(`<div class="px" style="font-size:11px;text-align:center;color:var(--red)">QR de pago · Cover ${CONFIG.cover} Bs</div>${v?`<div class="qrimg"><img src="${qrUrl(v)}" alt="QR de pago"></div><button class="btn" id="dq">Descargar QR</button>`:'<p style="text-align:center;margin:16px 0">Diego aún no cargó el QR. Puedes pagar en puerta.</p>'}<p class="mut" style="text-align:center;margin:10px 0">Envía el comprobante al número de Diego o paga en puerta.</p><button class="btn g" id="cq">Cerrar</button>`);$('#cq').onclick=cls;if($('#dq'))$('#dq').onclick=dlQr}
 async function dlQr(){const v=srv.qrv;try{const r=await fetch(qrUrl(v));const bl=await r.blob();const f=new File([bl],'qr-pago-diego20.png',{type:bl.type||'image/png'});if(navigator.canShare&&navigator.canShare({files:[f]})){try{await navigator.share({files:[f],title:'QR de pago'})}catch(e){}return}const u=URL.createObjectURL(bl),a=document.createElement('a');a.href=u;a.download='qr-pago-diego20.png';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),3000)}catch(e){window.open(qrUrl(v),'_blank')}}
-function initMap(){if(!window.L||!$('#lm'))return;const ll=[CONFIG.lat,CONFIG.lng];const m=L.map('lm',{zoomControl:false,tap:true}).setView(ll,16);L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',{subdomains:'abcd',maxZoom:19,attribution:'© OpenStreetMap · CARTO'}).addTo(m);L.control.zoom({position:'bottomleft'}).addTo(m);
+function initMap(){if(!window.L||!$('#lm'))return;const ll=[CONFIG.lat,CONFIG.lng];const m=L.map('lm',{zoomControl:false,tap:true}).setView(ll,16);L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OpenStreetMap'}).addTo(m);L.control.zoom({position:'bottomleft'}).addTo(m);
 const sp='<svg viewBox="0 0 16 16" width="28" height="28" shape-rendering="crispEdges" fill="#05101f"><rect x="6" y="6" width="4" height="5"/><rect x="7" y="4" width="2" height="2"/><rect x="3" y="5" width="3" height="1"/><rect x="2" y="7" width="4" height="1"/><rect x="3" y="9" width="3" height="1"/><rect x="4" y="11" width="2" height="1"/><rect x="10" y="5" width="3" height="1"/><rect x="10" y="7" width="4" height="1"/><rect x="10" y="9" width="3" height="1"/><rect x="10" y="11" width="2" height="1"/></svg>';
 L.marker(ll,{icon:L.divIcon({className:'',html:`<div class="spin"><b>${sp}</b><u></u></div>`,iconSize:[50,62],iconAnchor:[25,62]})}).addTo(m);setTimeout(()=>m.invalidateSize(),400)}
 
