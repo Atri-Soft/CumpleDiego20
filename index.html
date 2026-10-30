@@ -63,7 +63,7 @@ footer{text-align:center;color:var(--mut);font-size:17px;padding:10px 0 4px;disp
 <main id="app"></main>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
-const CONFIG={name:'DIEGO',age:20,eventDateISO:'2026-11-07T21:00:00-04:00',cover:40,mapsUrl:'https://maps.app.goo.gl/kXKxyTJz7Zar8vLb9',mapsEmbed:'Cochabamba, Bolivia',whatsappGroupUrl:'https://chat.whatsapp.com/TU_LINK_GRUPO_AQUI',diegoPhone:'591XXXXXXXX',payQrUrl:'',spotifyJamUrl:'https://open.spotify.com/',scriptUrl:'PEGAR_AQUI_URL_DE_GOOGLE_APPS_SCRIPT_EXEC',atrisoftIcon:'https://i.imgur.com/Ofcaqug.png'};
+const CONFIG={name:'DIEGO',age:20,eventDateISO:'2026-11-07T21:00:00-04:00',cover:40,mapsUrl:'https://maps.app.goo.gl/kXKxyTJz7Zar8vLb9',mapsEmbed:'Cochabamba, Bolivia',whatsappGroupUrl:'https://chat.whatsapp.com/TU_LINK_GRUPO_AQUI',diegoPhone:'591XXXXXXXX',payQrUrl:'',spotifyJamUrl:'https://open.spotify.com/',scriptUrl:'https://script.google.com/macros/s/AKfycbxGC9xZz6MLW18uzKnWHN1cBn4OS2bcC9J75BRJ0GVFqgnZIDvBXAEOpY5EE8PvjZoZ/exec',atrisoftIcon:'https://i.imgur.com/Ofcaqug.png'};
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const OK=()=>!CONFIG.scriptUrl.startsWith('PEGAR');
