@@ -98,15 +98,15 @@ main.ctr{min-height:100svh;display:flex;align-items:center}main.ctr .win{margin:
 body{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}input,textarea{-webkit-user-select:text;user-select:text}
 #gw,#gw *,#gs,#gs *{-webkit-user-select:none!important;user-select:none!important;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent}
 #gc{touch-action:none;outline:0}
-#fs{position:fixed;inset:0;z-index:400;background:#fff;display:flex;align-items:center;justify-content:center;padding:12px;animation:fi .25s}
-#fs img{width:100%;height:100%;object-fit:contain}
-#fs button{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom));transform:translateX(-50%);width:auto;padding:0 30px}
+#fsq{position:fixed;inset:0;z-index:400;background:#fff;display:flex;align-items:center;justify-content:center;padding:12px;animation:fi .25s}
+#fsq img{width:100%;height:100%;object-fit:contain}
+#fsq button{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom));transform:translateX(-50%);width:auto;padding:0 30px}
 </style></head><body>
 <main id="app"></main>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
-const CONFIG={name:'DIEGO',age:20,eventDateISO:'2026-11-07T19:00:00-04:00',cover:40,mapsUrl:'https://maps.app.goo.gl/qggTTFGzRfHzCeE56',mapsEmbed:'Cochabamba, Bolivia'/* cambia por las coordenadas exactas de la fiesta, ej: '-17.3935,-66.1570' */,diegoPhone:'59178706984',lat:-17.354645,lng: -66.179901,/* PEGAR coordenadas de la nueva ubicación, ej: lat:-17.3646,lng:-66.1629 */gh:{owner:'TU_USUARIO_GITHUB',repo:'TU_REPOSITORIO',branch:'main',path:'qr-pago.png'},qrPath:'qr-pago.png',spotifyJamUrl:'https://open.spotify.com/playlist/12muWvIQBJVDCwplmo1AFe',scriptUrl:'https://script.google.com/macros/s/AKfycbxzeFZh2qqWWLxY2KvKs4o2QL-KE4ElD2F7L0FK3QKTYWNZOvhGis6_1rnGM_4dNfNk/exec',atrisoftIcon:'https://i.imgur.com/Ofcaqug.png'};
+const CONFIG={name:'DIEGO',age:20,eventDateISO:'2026-11-07T19:00:00-04:00',cover:40,mapsUrl:'https://maps.app.goo.gl/qggTTFGzRfHzCeE56',mapsEmbed:'Cochabamba, Bolivia'/* cambia por las coordenadas exactas de la fiesta, ej: '-17.3935,-66.1570' */,diegoPhone:'59178706984',lat:-17.354645,lng:-66.179901,/* PEGAR coordenadas de la nueva ubicación, ej: lat:-17.3646,lng:-66.1629 */gh:{owner:'TU_USUARIO_GITHUB',repo:'TU_REPOSITORIO',branch:'main',path:'qr-pago.png'},qrPath:'qr-pago.png',spotifyJamUrl:'https://open.spotify.com/playlist/12muWvIQBJVDCwplmo1AFe',scriptUrl:'https://script.google.com/macros/s/AKfycbxzeFZh2qqWWLxY2KvKs4o2QL-KE4ElD2F7L0FK3QKTYWNZOvhGis6_1rnGM_4dNfNk/exec',atrisoftIcon:'https://i.imgur.com/Ofcaqug.png'};
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const OK=()=>!CONFIG.scriptUrl.startsWith('PEGAR');
@@ -238,7 +238,7 @@ $$('[data-o]').forEach(c=>c.onchange=()=>{const x=G.find(y=>y.id===c.dataset.o);
 $$('[data-d]').forEach(b=>b.onclick=()=>delGuest(b.dataset.d));
 if($('#fq'))$('#fq').onclick=()=>fsQr(qv);$('#uq').onclick=()=>$('#uf').click();$('#uf').onchange=e=>upQr(e.target.files[0]);
 const nw=G.filter(x=>!x.visto).map(x=>x.id);if(nw.length)setTimeout(()=>{api({action:'markSeen',pin:PD.pin,ids:nw}).catch(()=>{})},5000)}
-function fsQr(v){const d=document.createElement('div');d.id='fs';d.innerHTML=`<img src="${qrUrl(v)}" alt="QR de pago"><button class="btn" id="fsx">Cerrar</button>`;document.body.appendChild(d);let wl=null;try{if(navigator.wakeLock)navigator.wakeLock.request('screen').then(w=>wl=w).catch(()=>{})}catch(e){}$('#fsx').onclick=()=>{d.remove();try{if(wl)wl.release()}catch(e){}}}
+function fsQr(v){const d=document.createElement('div');d.id='fsq';d.innerHTML=`<img src="${qrUrl(v)}" alt="QR de pago"><button class="btn" id="fsx">Cerrar</button>`;document.body.appendChild(d);let wl=null;try{if(navigator.wakeLock)navigator.wakeLock.request('screen').then(w=>wl=w).catch(()=>{})}catch(e){}$('#fsx').onclick=()=>{d.remove();try{if(wl)wl.release()}catch(e){}}}
 function delGuest(id){const x=PD.guests.find(y=>y.id===id);if(!x)return;
 mdl(`<div class="px" style="font-size:10px;color:var(--red);text-align:center">Eliminar invitado</div><p style="text-align:center;margin:14px 0">¿Eliminar a <b>${esc(x.nombre)}</b>?</p><button class="btn" id="d1">Sí, continuar</button><button class="btn g" id="dn">Cancelar</button>`);$('#dn').onclick=cls;
 $('#d1').onclick=()=>{mdl(`<div class="px" style="font-size:10px;color:var(--red);text-align:center">Confirmación final</div><p style="text-align:center;margin:14px 0">Se borrará de Google Sheets. No se puede deshacer.</p><button class="btn" id="d2">Eliminar definitivamente</button><button class="btn g" id="dn2">Cancelar</button>`);$('#dn2').onclick=cls;
