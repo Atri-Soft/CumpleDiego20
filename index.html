@@ -106,7 +106,7 @@ body{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}input,
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
-const CONFIG={name:'DIEGO',age:20,eventDateISO:'2026-11-07T21:00:00-04:00',cover:40,mapsUrl:'https://maps.app.goo.gl/qggTTFGzRfHzCeE56',mapsEmbed:'Cochabamba, Bolivia'/* cambia por las coordenadas exactas de la fiesta, ej: '-17.3935,-66.1570' */,diegoPhone:'59178706984',lat:-17.354645,lng: -66.179901,/* PEGAR coordenadas de la nueva ubicación, ej: lat:-17.3646,lng:-66.1629 */gh:{owner:'TU_USUARIO_GITHUB',repo:'TU_REPOSITORIO',branch:'main',path:'qr-pago.png'},qrPath:'qr-pago.png',spotifyJamUrl:'https://open.spotify.com/playlist/12muWvIQBJVDCwplmo1AFe',scriptUrl:'https://script.google.com/macros/s/AKfycbxzeFZh2qqWWLxY2KvKs4o2QL-KE4ElD2F7L0FK3QKTYWNZOvhGis6_1rnGM_4dNfNk/exec',atrisoftIcon:'https://i.imgur.com/Ofcaqug.png'};
+const CONFIG={name:'DIEGO',age:20,eventDateISO:'2026-11-07T19:00:00-04:00',cover:40,mapsUrl:'https://maps.app.goo.gl/qggTTFGzRfHzCeE56',mapsEmbed:'Cochabamba, Bolivia'/* cambia por las coordenadas exactas de la fiesta, ej: '-17.3935,-66.1570' */,diegoPhone:'59178706984',lat:-17.354645,lng: -66.179901,/* PEGAR coordenadas de la nueva ubicación, ej: lat:-17.3646,lng:-66.1629 */gh:{owner:'TU_USUARIO_GITHUB',repo:'TU_REPOSITORIO',branch:'main',path:'qr-pago.png'},qrPath:'qr-pago.png',spotifyJamUrl:'https://open.spotify.com/playlist/12muWvIQBJVDCwplmo1AFe',scriptUrl:'https://script.google.com/macros/s/AKfycbxzeFZh2qqWWLxY2KvKs4o2QL-KE4ElD2F7L0FK3QKTYWNZOvhGis6_1rnGM_4dNfNk/exec',atrisoftIcon:'https://i.imgur.com/Ofcaqug.png'};
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const OK=()=>!CONFIG.scriptUrl.startsWith('PEGAR');
@@ -125,13 +125,13 @@ function guest(){
 $('#app').innerHTML=`
 <section id="hero" class="win rv"><div class="tt"><i></i>DIEGO·TRACKER<i></i></div>
 <div class="px" style="font-size:9px;color:var(--sky)">Cumpleaños número</div><div class="n20">20</div><div class="big">${CONFIG.name}</div>
-<div class="ticket"><div class="px">Estás invitado a la noche</div><p style="margin-top:6px">Sábado 07 de noviembre · 21:00 hrs · Cochabamba</p><p class="mut">Vestimenta: casual</p></div>
+<div class="ticket"><div class="px">Estás invitado a la noche</div><p style="margin-top:6px">Sábado 07 de noviembre · 19:00 hrs · Cochabamba</p><p class="mut">Vestimenta: casual</p></div>
 <div class="cd" id="cd">${['DÍAS','HRS','MIN','SEG'].map((l,i)=>`<div><b id="c${i}">00</b><span>${l}</span></div>`).join('')}</div>
 <div class="mq"><span>${'▪ 20 AÑOS ▪ 07·NOV ▪ 21:00 HRS ▪ COCHABAMBA '.repeat(6)}</span></div></section>
 
 <section class="win rv"><div class="tt"><i></i>UBICACIÓN<i></i></div>
 <div id="mapbox"><div id="lm"></div><svg id="mw" viewBox="0 0 100 100" width="84" height="84"><g fill="rgba(20,40,90,.8)" stroke="#6fb4f0" stroke-width="1.2"><polygon points="50,2 85,15 98,50 85,85 50,98 15,85 2,50 15,15"/><g fill="none"><polygon points="50,20 74,28 80,50 74,72 50,80 26,72 20,50 26,28"/><polygon points="50,36 62,40 64,50 62,60 50,64 38,60 36,50 38,40"/></g><path d="M50 2V98M2 50H98M15 15L85 85M85 15L15 85"/></g></svg></div>
-<p class="px" style="font-size:9px;margin:14px 0 4px;color:var(--sky)">Sábado 07 · 21:00 hrs · Vestimenta casual</p>
+<p class="px" style="font-size:9px;margin:14px 0 4px;color:var(--sky)">Sábado 07 · 19:00 hrs · Vestimenta casual</p>
 <a class="btn" href="${CONFIG.mapsUrl}" target="_blank" rel="noopener">${ICON}Abrir en Google Maps</a>
 <div id="qr"></div><p class="mut" style="text-align:center">Escanea para llegar</p>
 </section>
