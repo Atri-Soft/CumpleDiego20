@@ -101,12 +101,28 @@ body{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}input,
 #fsq{position:fixed;inset:0;z-index:400;background:#fff;display:flex;align-items:center;justify-content:center;padding:12px;animation:fi .25s}
 #fsq img{width:100%;height:100%;object-fit:contain}
 #fsq button{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom));transform:translateX(-50%);width:auto;padding:0 30px}
+#rnm{position:fixed;inset:0;z-index:280;background:#04101f;display:flex;align-items:center;justify-content:center;padding:16px;overflow:auto;animation:fi .4s}
+.rn-box{width:100%;max-width:420px;background:var(--scr);border:4px solid var(--red);box-shadow:4px 4px 0 #04101f,0 0 40px rgba(229,38,47,.35);padding:22px 16px;text-align:center;animation:rnIn .6s var(--ease),rnGlow 2.4s ease-in-out .6s infinite}
+.rn-box.shake{animation:shk .45s}
+.rn-box svg{width:58px;height:58px;fill:none;stroke:var(--red);stroke-width:1.8;stroke-linejoin:round;stroke-linecap:round;animation:rnW 1.6s ease-in-out infinite}
+.rn-box h3{font:11px var(--px);color:var(--red);margin:12px 0;line-height:1.6}
+.rn-box p{margin-bottom:12px}.rn-box label{text-align:left}
+#rne{color:var(--red);min-height:22px;margin:-6px 0 10px}
+@keyframes rnIn{from{transform:translateY(30px) scale(.94);opacity:0}}
+@keyframes rnGlow{50%{box-shadow:4px 4px 0 #04101f,0 0 56px rgba(229,38,47,.6)}}
+@keyframes rnW{50%{transform:scale(1.1)}}
+@keyframes shk{20%{transform:translateX(-8px)}40%{transform:translateX(8px)}60%{transform:translateX(-5px)}80%{transform:translateX(5px)}}
 </style></head><body>
 <main id="app"></main>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
-const CONFIG={name:'DIEGO',age:20,eventDateISO:'2026-11-07T19:00:00-04:00',cover:40,mapsUrl:'https://maps.app.goo.gl/qggTTFGzRfHzCeE56',mapsEmbed:'Cochabamba, Bolivia'/* cambia por las coordenadas exactas de la fiesta, ej: '-17.3935,-66.1570' */,diegoPhone:'59178706984',lat:-17.354645,lng:-66.179901,/* PEGAR coordenadas de la nueva ubicación, ej: lat:-17.3646,lng:-66.1629 */gh:{owner:'TU_USUARIO_GITHUB',repo:'TU_REPOSITORIO',branch:'main',path:'qr-pago.png'},qrPath:'qr-pago.png',spotifyJamUrl:'https://open.spotify.com/playlist/0GTLqnjaufSBzQBdcXAmFm?si=tLJYttDuT32WGiSX6jbr4g&utm_source=copy-link&pt=ff3b2133dbcccc14b69180b19f7b2823&pi=0S_9GlW8SreDl',scriptUrl:'https://script.google.com/macros/s/AKfycbxzeFZh2qqWWLxY2KvKs4o2QL-KE4ElD2F7L0FK3QKTYWNZOvhGis6_1rnGM_4dNfNk/exec',atrisoftIcon:'https://i.imgur.com/Ofcaqug.png'};
+const CONFIG={name:'DIEGO',age:20,eventDateISO:'2026-11-07T19:00:00-04:00',cover:40,renameList:[
+  /* ▼▼ ESCRIBE AQUÍ el nombre que debe cambiar (uno por línea, entre comillas, con coma) ▼▼ */
+  'Adrian Montaño',
+  'otro nombre falso',
+  /* ▲▲ no importan mayúsculas ni tildes ▲▲ */
+],mapsUrl:'https://maps.app.goo.gl/qggTTFGzRfHzCeE56',mapsEmbed:'Cochabamba, Bolivia'/* cambia por las coordenadas exactas de la fiesta, ej: '-17.3935,-66.1570' */,diegoPhone:'59178706984',lat:-17.354645,lng:-66.179901,/* PEGAR coordenadas de la nueva ubicación, ej: lat:-17.3646,lng:-66.1629 */gh:{owner:'TU_USUARIO_GITHUB',repo:'TU_REPOSITORIO',branch:'main',path:'qr-pago.png'},qrPath:'qr-pago.png',spotifyJamUrl:'https://open.spotify.com/playlist/0GTLqnjaufSBzQBdcXAmFm?si=tLJYttDuT32WGiSX6jbr4g&utm_source=copy-link&pt=ff3b2133dbcccc14b69180b19f7b2823&pi=0S_9GlW8SreDl',scriptUrl:'https://script.google.com/macros/s/AKfycbztEBvtTIGsvWq0wpyqadZuZD-dIpta2OGE9A5L3Cguh24Rq7egDgL2TjWbEUeQfE07/exec',atrisoftIcon:'https://i.imgur.com/Ofcaqug.png'};
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const OK=()=>!CONFIG.scriptUrl.startsWith('PEGAR');
@@ -151,7 +167,7 @@ initGame();initMap();rsvpView();reveal();sync();setInterval(sync,15000);document
 function tick(){let d=Math.max(0,new Date(CONFIG.eventDateISO)-Date.now())/1e3;[86400,3600,60,1].forEach((u,i)=>{const v=Math.floor(d/u);d-=v*u;const e=$('#c'+i);if(e)e.textContent=String(v).padStart(2,'0')})}
 async function sync(){if(!OK())return;try{const r=await get('?action=guest'+(me?'&id='+encodeURIComponent(me.id):''));if(!r.ok)return;const s0=JSON.stringify([me,srv.qrv]);srv=r.config||srv;if(me){if(r.guest)me=Object.assign(me,r.guest);else me=null;ls('dg',me)}if(s0!==JSON.stringify([me,srv.qrv]))rsvpView()}catch(e){}}
 function unlock(){const on=me&&me.status==='SI';$('#gs').style.display=on?'block':'none';if(on)reveal()}
-function rsvpView(){const box=$('#rs');if(!box)return;unlock();
+function rsvpView(){const box=$('#rs');if(!box)return;unlock();checkName();
 if(me&&me.status==='SI'&&!change){const cv=me.opcion==='COVER',left=Math.max(0,2-(me.cambios||0));
 box.innerHTML=`<div class="pass"><div class="lb">Ticket #${esc(me.num||'--')}</div><div class="px" style="font-size:14px;margin:10px 0">${esc(me.name)}</div><div class="stamp">CONFIRMADO</div>
 <p>${cv?`Cover: ${CONFIG.cover} Bs ${me.pagado?'· PAGADO':'· PENDIENTE'}`:'Yo traje: llevo mi bebida'}</p>
@@ -252,5 +268,30 @@ let sha;const g=await fetch(u+'?ref='+branch,{headers:H});if(g.ok)sha=(await g.j
 const p=await fetch(u,{method:'PUT',headers:H,body:JSON.stringify({message:'QR de pago',content:b64,branch,sha})});
 if(!p.ok){if(p.status===401||p.status===403||p.status===404)ls('ght',null);st.textContent='No se pudo subir ('+p.status+'). Revisa token y repositorio.';return}
 const v=String(Date.now());await api({action:'setQrV',pin:PD.pin,v});PD.config.qrv=v;st.textContent='';draw();setTimeout(()=>{const s=$('#us');if(s)s.textContent='Subido. GitHub Pages puede tardar 1 min en publicarlo.'},50)}catch(e){st.textContent='Error de conexión.'}}
+/* ===== CAMBIO DE NOMBRE OBLIGATORIO ===== */
+const normN=s=>String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/\s+/g,' ').trim();
+const BADW=['puta','puto','mierda','verga','pene','culo','cojudo','carajo','pendejo','idiota','estupido','imbecil','concha','chucha','joder','mrd','gilipollas','cabron'];
+function lev(a,b){const m=[];for(let i=0;i<=a.length;i++){m[i]=[i];for(let j=1;j<=b.length;j++)m[i][j]=i?0:j}for(let i=1;i<=a.length;i++)for(let j=1;j<=b.length;j++)m[i][j]=Math.min(m[i-1][j]+1,m[i][j-1]+1,m[i-1][j-1]+(a[i-1]===b[j-1]?0:1));return m[a.length][b.length]}
+function nameErr(v){const n=normN(v),old=normN(me.name),w=n.split(' ');
+if(!/^[A-Za-zÁÉÍÓÚÜÑáéíóúüñ ]+$/.test(v))return 'Usa solo letras, sin números ni símbolos.';
+if(w.length<2)return 'Escribe tu nombre y apellido.';
+if(w.some(x=>x.length<2||!/[aeiouy]/.test(x)||/(.)\1{2,}/.test(x))||w.every(x=>x===w[0]))return 'Escribe tu nombre real, por favor.';
+if(w.some(x=>BADW.includes(x)))return 'Ese nombre no es válido. Usa tu nombre real.';
+if(n===old||lev(n,old)<3||(CONFIG.renameList||[]).map(normN).includes(n))return 'Debes cambiar tu nombre por tu nombre real.';
+return ''}
+function checkName(){if(!me||$('#rnm'))return;
+if(!(CONFIG.renameList||[]).map(normN).includes(normN(me.name)))return;
+document.body.style.overflow='hidden';
+const o=document.createElement('div');o.id='rnm';
+o.innerHTML=`<div class="rn-box"><svg viewBox="0 0 24 24"><path d="M12 3L2 21h20L12 3z"/><path d="M12 10v5M12 18h.01"/></svg><h3>Advertencia</h3><p>Detectamos que tu nombre no es verdadero. Por favor escribe tu nombre y apellido reales para poder identificarte y mantener tu lugar en la fiesta.</p><label>Tu nombre y apellido</label><input id="rni" maxlength="40" autocomplete="name"><p id="rne"></p><button class="btn" id="rnb">Cambiar nombre</button></div>`;
+document.body.appendChild(o);
+const i=$('#rni'),e=$('#rne'),bx=o.querySelector('.rn-box');
+i.oninput=()=>{i.value=i.value.replace(/[^A-Za-zÁÉÍÓÚÜÑáéíóúüñ ]/g,'').replace(/ {2,}/g,' ')};
+$('#rnb').onclick=()=>{const v=i.value.trim().replace(/\s+/g,' ').split(' ').map(x=>x.charAt(0).toUpperCase()+x.slice(1).toLowerCase()).join(' '),er=nameErr(v);
+if(er){e.textContent=er;bx.classList.remove('shake');void bx.offsetWidth;bx.classList.add('shake');setTimeout(()=>bx.classList.remove('shake'),500);return}
+e.textContent='';$('#rnb').disabled=true;
+const pr=OK()?api({action:'rename',id:me.id,nombre:v}).catch(()=>null):Promise.resolve({ok:true});
+swing(async()=>{const r=await pr;if(!r||!r.ok){$('#rnb').disabled=false;e.textContent='No se pudo guardar. Intenta de nuevo.';return}
+me.name=v;ls('dg',me);o.remove();document.body.style.overflow='';rsvpView()})}}
 if(isAdmin)admin();else{swing();guest()}
 </script></body></html>
