@@ -112,6 +112,40 @@ body{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}input,
 @keyframes rnGlow{50%{box-shadow:4px 4px 0 #04101f,0 0 56px rgba(229,38,47,.6)}}
 @keyframes rnW{50%{transform:scale(1.1)}}
 @keyframes shk{20%{transform:translateX(-8px)}40%{transform:translateX(8px)}60%{transform:translateX(-5px)}80%{transform:translateX(5px)}}
+#nt{position:fixed;inset:0;z-index:275;background:rgba(4,16,31,.92);display:flex;align-items:center;justify-content:center;padding:16px;animation:fi .3s}
+.rn-box.info{border-color:var(--sky);box-shadow:4px 4px 0 #04101f,0 0 40px rgba(111,180,240,.3);animation:rnIn .6s var(--ease)}
+.rn-box.info svg{stroke:var(--sky)}.rn-box.info h3{color:var(--sky)}
+#pdm{position:fixed;inset:0;z-index:290;background:radial-gradient(circle at 50% 30%,#12305e,#04101f 70%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:16px;overflow:hidden;animation:fi .5s}
+#pdm .pt{font-size:16px;color:#fff;text-shadow:3px 3px 0 var(--red);text-align:center}
+.pw{display:flex;align-items:flex-end;justify-content:center;gap:6px;width:100%;max-width:420px}
+.pc{flex:1;display:flex;flex-direction:column;align-items:center;min-width:0}
+.pb{width:100%;display:flex;align-items:flex-start;justify-content:center;padding-top:8px;font:14px var(--px);color:#fff;background:var(--blue);border:4px solid #04101f;box-shadow:inset -4px 0 0 var(--blue-d),inset 4px 4px 0 var(--sky);transform-origin:bottom;transform:scaleY(0);animation:grow .7s var(--ease) var(--d) forwards}
+.r1 .pb{background:var(--red);box-shadow:inset -4px 0 0 var(--red-d),inset 4px 4px 0 #ff6a70}
+@keyframes grow{to{transform:scaleY(1)}}
+.pn{text-align:center;opacity:0;transform:translateY(10px);animation:rise .5s var(--ease) var(--d) forwards;margin-bottom:6px;max-width:100%}
+.pn b{display:block;font:8px var(--px);word-break:break-word;color:#fff;line-height:1.6}.pn span{font:8px var(--px);color:var(--sky)}
+.r1 .pn b{font-size:10px;color:#ffd54a}
+@keyframes rise{to{opacity:1;transform:none}}
+.hero{opacity:0;margin-bottom:2px}
+.h1{animation:rise .3s var(--d) forwards,j1 .45s calc(var(--d) + .3s) ease-in-out infinite alternate}
+.h2{animation:rise .3s var(--d) forwards,j2 .55s calc(var(--d) + .3s) ease-in-out infinite alternate}
+.h3{animation:rise .3s var(--d) forwards,j3 .6s calc(var(--d) + .3s) ease-in-out infinite alternate}
+@keyframes j1{to{transform:translateY(-24px) scale(1.06)}}
+@keyframes j2{to{transform:translateY(-15px) rotate(-4deg)}}
+@keyframes j3{from{transform:rotate(-6deg)}to{transform:translateY(-9px) rotate(6deg)}}
+.wv{transform-box:fill-box;transform-origin:50% 100%;animation:wave .3s ease-in-out infinite alternate}
+@keyframes wave{from{transform:rotate(-22deg)}to{transform:rotate(22deg)}}
+.qrbox.info{border-color:var(--sky);background:rgba(111,180,240,.07)}.qrbox.info .lb{color:var(--sky)}
+.qrbox.gold{border-color:#ffd54a;background:rgba(255,213,74,.07)}.qrbox.gold .lb{color:#ffd54a}
+.btn.gold{background:#ffd54a;color:#1a1400;box-shadow:inset -4px -4px 0 #b8941c,inset 4px 4px 0 #fff0a8}
+.btn.amber{background:#f5a623;color:#1a1000;box-shadow:inset -4px -4px 0 #b36f08,inset 4px 4px 0 #ffd089}
+.btn.grn{background:#1fb85a;color:#04140a;box-shadow:inset -4px -4px 0 #13803c,inset 4px 4px 0 #6df0a0}
+.btn.dng{background:#3a0f14;border-color:var(--red);box-shadow:inset -4px -4px 0 #200609,inset 4px 4px 0 #6b1a22}
+.tag.am{background:#f5a623;color:#1a1000}
+.wt{font:11px var(--px);color:#ffd54a;text-align:center;line-height:1.6;opacity:0;animation:rise .5s var(--ease) var(--d) forwards}
+#pdx{width:auto;padding:0 30px;opacity:0;animation:rise .4s 1.2s forwards}
+.cf{position:absolute;top:-14px;width:8px;height:8px;opacity:0;animation:cf linear infinite;pointer-events:none}
+@keyframes cf{0%{opacity:1;transform:translateY(0) rotate(0)}100%{opacity:1;transform:translateY(110vh) rotate(540deg)}}
 </style></head><body>
 <main id="app"></main>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
@@ -122,7 +156,7 @@ const CONFIG={name:'DIEGO',age:20,eventDateISO:'2026-11-07T19:00:00-04:00',cover
   'Teta Totito Aña',
   ' ',
   /* ▲▲ no importan mayúsculas ni tildes ▲▲ */
-],mapsUrl:'https://maps.app.goo.gl/qggTTFGzRfHzCeE56',mapsEmbed:'Cochabamba, Bolivia'/* cambia por las coordenadas exactas de la fiesta, ej: '-17.3935,-66.1570' */,diegoPhone:'59178706984',lat:-17.354645,lng:-66.179901,/* PEGAR coordenadas de la nueva ubicación, ej: lat:-17.3646,lng:-66.1629 */gh:{owner:'TU_USUARIO_GITHUB',repo:'TU_REPOSITORIO',branch:'main',path:'qr-pago.png'},qrPath:'qr-pago.png',spotifyJamUrl:'https://open.spotify.com/playlist/0GTLqnjaufSBzQBdcXAmFm?si=tLJYttDuT32WGiSX6jbr4g&utm_source=copy-link&pt=ff3b2133dbcccc14b69180b19f7b2823&pi=0S_9GlW8SreDl',scriptUrl:'https://script.google.com/macros/s/AKfycbztEBvtTIGsvWq0wpyqadZuZD-dIpta2OGE9A5L3Cguh24Rq7egDgL2TjWbEUeQfE07/exec',atrisoftIcon:'https://i.imgur.com/Ofcaqug.png'};
+],mapsUrl:'https://maps.app.goo.gl/qggTTFGzRfHzCeE56',mapsEmbed:'Cochabamba, Bolivia'/* cambia por las coordenadas exactas de la fiesta, ej: '-17.3935,-66.1570' */,diegoPhone:'59178706984',lat:-17.354645,lng:-66.179901,/* PEGAR coordenadas de la nueva ubicación, ej: lat:-17.3646,lng:-66.1629 */gh:{owner:'Atri-Soft',repo:'CumpleDiego20',branch:'main',path:'qr-pago.png'},qrPath:'qr-pago.png',spotifyJamUrl:'https://open.spotify.com/playlist/0GTLqnjaufSBzQBdcXAmFm?si=tLJYttDuT32WGiSX6jbr4g&utm_source=copy-link&pt=ff3b2133dbcccc14b69180b19f7b2823&pi=0S_9GlW8SreDl',scriptUrl:'https://script.google.com/macros/s/AKfycbwjPGbUf9jQpVn67tkfK-1LZFXWDrsuGV22YTLAvzM1AtlZQn5BY5bN6DeisVxT-RaM/exec',atrisoftIcon:'https://i.imgur.com/Ofcaqug.png'};
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const OK=()=>!CONFIG.scriptUrl.startsWith('PEGAR');
@@ -133,6 +167,7 @@ const ls=(k,v)=>{try{if(v===undefined)return JSON.parse(localStorage.getItem(k))
 let lt=0;document.addEventListener('touchend',e=>{const n=Date.now();if(n-lt<300&&!/INPUT|TEXTAREA/.test(e.target.tagName))e.preventDefault();lt=n},{passive:false});
 const ICON='<svg class="i" viewBox="0 0 24 24"><path d="M12 21V10M12 10L5 4M12 10l7-6M4 14h16M7 18h10"/></svg>';
 const isAdmin=new URLSearchParams(location.search).get('p')==='diego'||location.hash==='#diego';
+const isMod=new URLSearchParams(location.search).get('p')==='mod'||location.hash==='#mod';
 function reveal(){const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}}),{threshold:.1});$$('.rv').forEach((e,i)=>{e.style.transitionDelay=(i%3)*.07+'s';io.observe(e)})}
 
 /* ============ INVITADOS ============ */
@@ -165,7 +200,7 @@ try{new QRCode($('#qr'),{text:CONFIG.mapsUrl,width:120,height:120})}catch(e){}
 initGame();initMap();rsvpView();reveal();sync();setInterval(sync,15000);document.addEventListener('visibilitychange',()=>{if(!document.hidden)sync()});$('#go').onclick=start;
 }
 function tick(){let d=Math.max(0,new Date(CONFIG.eventDateISO)-Date.now())/1e3;[86400,3600,60,1].forEach((u,i)=>{const v=Math.floor(d/u);d-=v*u;const e=$('#c'+i);if(e)e.textContent=String(v).padStart(2,'0')})}
-async function sync(){if(!OK())return;try{const r=await get('?action=guest'+(me?'&id='+encodeURIComponent(me.id):''));if(!r.ok)return;const s0=JSON.stringify([me,srv.qrv]);srv=r.config||srv;if(me){if(r.guest)me=Object.assign(me,r.guest);else me=null;ls('dg',me)}if(s0!==JSON.stringify([me,srv.qrv]))rsvpView()}catch(e){}}
+async function sync(){if(!OK())return;try{const r=await get('?action=guest'+(me?'&id='+encodeURIComponent(me.id):''));if(!r.ok)return;const s0=JSON.stringify([me,srv.qrv]);srv=r.config||srv;if(me){if(r.guest)me=Object.assign(me,r.guest);else me=null;ls('dg',me)}if(s0!==JSON.stringify([me,srv.qrv]))rsvpView();nextOv()}catch(e){}}
 function unlock(){const on=me&&me.status==='SI';$('#gs').style.display=on?'block':'none';if(on)reveal()}
 function rsvpView(){const box=$('#rs');if(!box)return;unlock();checkName();
 if(me&&me.status==='SI'&&!change){const cv=me.opcion==='COVER',left=Math.max(0,2-(me.cambios||0));
@@ -280,7 +315,7 @@ if(w.some(x=>BADW.includes(x)))return 'Ese nombre no es válido. Usa tu nombre r
 if(n===old||lev(n,old)<3||(CONFIG.renameList||[]).map(normN).includes(n))return 'Debes cambiar tu nombre por tu nombre real.';
 return ''}
 function checkName(){if(!me||$('#rnm'))return;
-if(!(CONFIG.renameList||[]).map(normN).includes(normN(me.name)))return;
+if(!me.forzar&&!(CONFIG.renameList||[]).map(normN).includes(normN(me.name)))return;
 document.body.style.overflow='hidden';
 const o=document.createElement('div');o.id='rnm';
 o.innerHTML=`<div class="rn-box"><svg viewBox="0 0 24 24"><path d="M12 3L2 21h20L12 3z"/><path d="M12 10v5M12 18h.01"/></svg><h3>Advertencia</h3><p>Detectamos que tu nombre no es verdadero. Por favor escribe tu nombre y apellido reales para poder identificarte y mantener tu lugar en la fiesta.</p><label>Tu nombre y apellido</label><input id="rni" maxlength="40" autocomplete="name"><p id="rne"></p><button class="btn" id="rnb">Cambiar nombre</button></div>`;
@@ -292,6 +327,53 @@ if(er){e.textContent=er;bx.classList.remove('shake');void bx.offsetWidth;bx.clas
 e.textContent='';$('#rnb').disabled=true;
 const pr=OK()?api({action:'rename',id:me.id,nombre:v}).catch(()=>null):Promise.resolve({ok:true});
 swing(async()=>{const r=await pr;if(!r||!r.ok){$('#rnb').disabled=false;e.textContent='No se pudo guardar. Intenta de nuevo.';return}
-me.name=v;ls('dg',me);o.remove();document.body.style.overflow='';rsvpView()})}}
-if(isAdmin)admin();else{swing();guest()}
+me.name=v;me.forzar=false;ls('dg',me);o.remove();document.body.style.overflow='';rsvpView();nextOv()})}}
+
+/* ===== AVISOS Y PODIO (INVITADOS) ===== */
+const seen=k=>(ls('seen')||[]).includes(k),mark=k=>{const a=ls('seen')||[];a.push(k);ls('seen',a.slice(-60))};
+function closeOv(el,k,cb){el.style.transition='opacity .3s';el.style.opacity=0;setTimeout(()=>{el.remove();if(k)mark(k);if(cb)cb();nextOv()},300)}
+function showNotice(title,text,k,ack){const o=document.createElement('div');o.id='nt';o.innerHTML=`<div class="rn-box info"><svg viewBox="0 0 24 24"><path d="M6 17V11a6 6 0 0112 0v6l2 2H4l2-2z"/><path d="M10 21h4"/></svg><h3>${title}</h3><p>${esc(text)}</p><button class="btn" id="ntb">Entendido</button></div>`;document.body.appendChild(o);$('#ntb').onclick=()=>closeOv(o,k,ack)}
+function nextOv(){if(!isAdmin&&!isMod&&!srv.podium&&$('#pdm'))$('#pdm').remove();if(isAdmin||isMod||$('#rnm')||$('#nt')||$('#pdm'))return;if($('#cur')){setTimeout(nextOv,1200);return}
+if(me&&me.aviso&&!seen('a:'+me.avisoTs)){showNotice('Aviso para ti',me.aviso,'a:'+me.avisoTs,()=>{me.aviso='';ls('dg',me);if(OK())api({action:'ackAviso',id:me.id}).catch(()=>{})});return}
+const n=srv.notice;if(n&&!seen('n:'+n.id)){showNotice('Aviso de Diego',n.text,'n:'+n.id);return}
+const p=srv.podium;if(p&&!seen('p:'+p.id))showPodium(p)}
+function showPodium(p){const o=document.createElement('div');o.id='pdm';const t=p.top||[];
+const sp=r=>{const E=r===3?'<rect x="5" y="5" width="2" height="1" fill="#fff"/><rect x="9" y="5" width="2" height="1" fill="#fff"/>':'<rect x="5" y="4" width="2" height="2" fill="#fff"/><rect x="9" y="4" width="2" height="2" fill="#fff"/>',M=r===1?'<rect x="6" y="7" width="4" height="2" fill="#fff"/>':r===2?'<rect x="6" y="8" width="4" height="1" fill="#fff"/>':'<rect x="7" y="8" width="2" height="1" fill="#fff"/>',A=r===1?'<rect x="2" y="3" width="2" height="6" fill="#e5262f"/><rect x="12" y="3" width="2" height="6" fill="#e5262f"/><rect x="5" y="-1" width="6" height="2" fill="#ffd54a"/><rect x="5" y="-3" width="1" height="2" fill="#ffd54a"/><rect x="7" y="-3" width="2" height="2" fill="#ffd54a"/><rect x="10" y="-3" width="1" height="2" fill="#ffd54a"/>':r===2?'<rect x="2" y="9" width="2" height="4" fill="#e5262f"/><g class="wv"><rect x="12" y="3" width="2" height="6" fill="#e5262f"/></g>':'<rect x="0" y="9" width="4" height="2" fill="#e5262f"/><rect x="12" y="9" width="4" height="2" fill="#e5262f"/>';return `<svg viewBox="0 -4 16 20" width="44" height="55" shape-rendering="crispEdges" style="overflow:visible"><rect x="4" y="2" width="8" height="8" fill="#e5262f"/><rect x="4" y="9" width="8" height="5" fill="#2f6fc9"/>${E}${M}${A}</svg>`};
+const col=(i,r,h,d)=>{const x=t[i];return `<div class="pc r${r}"><div class="pn" style="--d:${d+.8}s">${x?`<b>${esc(x.nombre)}</b><span>${esc(x.score)} pts</span>`:'<b>—</b>'}</div>${x?`<div class="hero h${r}" style="--d:${d+.9}s">${sp(r)}</div>`:''}<div class="pb" style="height:${h}px;--d:${d}s">${r}</div></div>`};
+const cols=['#e5262f','#6fb4f0','#fff','#2f6fc9','#ffd54a'];
+const cf=t.length?Array.from({length:40},()=>`<i class="cf" style="left:${Math.random()*100}%;background:${cols[Math.floor(Math.random()*5)]};animation-delay:${(4.8+Math.random()*2).toFixed(2)}s;animation-duration:${(2+Math.random()*2).toFixed(2)}s"></i>`).join(''):'';
+o.innerHTML=t.length?`<div class="pt px">Podio final</div><div class="pw">${col(1,2,110,2.2)}${col(0,1,160,3.8)}${col(2,3,80,.6)}</div><div class="wt" style="--d:5s">¡Ganador!<br>${esc(t[0].nombre)}</div><button class="btn" id="pdx">Cerrar</button>${cf}`:`<div class="pt px">Aún no hay puntajes</div><button class="btn" id="pdx">Cerrar</button>`;
+document.body.appendChild(o);$('#pdx').onclick=()=>closeOv(o,'p:'+p.id)}
+
+/* ============ PANEL MODERADOR ============ */
+let MP=null,mf='ALL',mq='',mpl=0;
+const mapi=o=>api(Object.assign({mpin:MP.pin},o));
+function mod(){document.title='Moderador';const pin=ls('mpin');$('#app').className=pin?'':'ctr';
+$('#app').innerHTML=`<div class="win"><div class="tt"><i></i>MODERADOR<i></i></div><div id="ap"></div></div>`;
+if(!pin){$('#ap').innerHTML=`<label>PIN de acceso</label><input id="pi" type="password" inputmode="numeric" maxlength="12"><button class="btn" id="pb">Entrar</button><p id="pe" style="color:var(--red);margin-top:10px"></p>`;$('#pb').onclick=()=>mload($('#pi').value.trim());return}mload(pin)}
+async function mload(pin){try{const r=await get('?action=modpanel&pin='+encodeURIComponent(pin));if(!r.ok){ls('mpin',null);mod();const e=$('#pe');if(e)e.textContent='PIN incorrecto.';return}ls('mpin',pin);$('#app').className='';MP=Object.assign(r,{pin,sig:JSON.stringify([r.guests,r.config])});mdraw();if(!mpl){mpl=setInterval(()=>mrefresh(1),10000);document.addEventListener('visibilitychange',()=>{if(!document.hidden)mrefresh(1)})}}catch(e){$('#ap').innerHTML='<p>Error de conexión.</p>'}}
+async function mrefresh(quiet){if(!MP||(quiet&&$('#md')))return;try{const r=await get('?action=modpanel&pin='+encodeURIComponent(MP.pin));if(!r.ok)return;const s=JSON.stringify([r.guests,r.config]);if(quiet&&s===MP.sig)return;MP=Object.assign(r,{pin:MP.pin,sig:s});if(quiet&&document.activeElement&&/^(sq|gn)$/.test(document.activeElement.id))return;mdraw()}catch(e){}}
+function conf(t,m,ok,fn){mdl(`<div class="px" style="font-size:10px;color:var(--red);text-align:center">${t}</div><p style="text-align:center;margin:14px 0">${m}</p><button class="btn" id="cy">${ok}</button><button class="btn g" id="cn">Cancelar</button>`);$('#cn').onclick=cls;$('#cy').onclick=()=>{cls();fn()}}
+function mdraw(){const G=MP.guests,si=G.filter(x=>x.asistencia==='SI'),cv=si.filter(x=>x.opcion==='COVER'),tr=si.filter(x=>x.opcion==='TRAIGO'),pd=cv.filter(x=>x.pagado),C=CONFIG.cover,nt=MP.config.notice;
+const fl={ALL:()=>1,SI:x=>x.asistencia==='SI',NO:x=>x.asistencia==='NO',COVER:x=>x.opcion==='COVER',TRAIGO:x=>x.opcion==='TRAIGO',PAG:x=>x.pagado,PEN:x=>x.opcion==='COVER'&&!x.pagado};
+const list=G.filter(x=>fl[mf](x)&&x.nombre.toLowerCase().includes(mq));
+const gn=($('#gn')||{}).value||'';
+$('#ap').innerHTML=`<div class="met"><div><b>${si.length}</b><span>CONFIRMADOS</span></div><div><b>${G.length-si.length}</b><span>BAJAS</span></div><div><b>${cv.length}</b><span>CON COVER</span></div><div><b>${tr.length}</b><span>YO TRAJE</span></div><div><b>${pd.length}</b><span>YA PAGARON</span></div><div><b>${cv.length-pd.length}</b><span>PENDIENTES</span></div><div><b>${cv.length*C} Bs</b><span>ESTIMADO</span></div><div class="r"><b>${pd.length*C} Bs</b><span>RECAUDADO</span></div></div>
+<div class="qrbox info"><div class="lb">Aviso global</div><textarea id="gn" rows="2" maxlength="300" placeholder="Mensaje para todos los invitados" style="margin-top:8px">${esc(gn)}</textarea><button class="btn b" id="gs">Enviar aviso a todos</button>${nt?`<p class="mut" style="margin-top:8px">Activo: "${esc(nt.text)}"</p><button class="btn g" id="gc2" style="min-height:44px">Quitar aviso</button>`:''}</div>
+<div class="qrbox gold"><div class="lb">Podio del juego</div><button class="btn gold" id="gp" style="margin-top:8px">Lanzar podio a todos</button>${MP.config.podium?'<p class="mut" style="margin-top:8px">Podio activo para los invitados.</p><button class="btn g" id="gx" style="min-height:44px">Dejar de mostrar podio</button>':''}</div>
+<input id="sq" placeholder="Buscar" value="${esc(mq)}" style="margin-top:12px;margin-bottom:0"><div class="chips">${[['ALL','Todos'],['SI','Sí'],['NO','No'],['COVER','Cover'],['TRAIGO','Traje'],['PAG','Pagados'],['PEN','Pendientes']].map(a=>`<button data-f="${a[0]}" class="${mf===a[0]?'on':''}">${a[1]}</button>`).join('')}</div>
+${list.map(x=>`<div class="gi"><div style="display:flex;justify-content:space-between;gap:8px"><b>${esc(x.nombre)}</b><span class="mut">#${esc(x.num)}</span></div><span class="tag ${x.asistencia==='NO'?'r':''}">${x.asistencia}</span>${x.opcion?`<span class="tag">${x.opcion==='COVER'?'COVER':'YO TRAJE'}</span>`:''}${x.pagado?'<span class="tag k">PAGADO</span>':''}${x.forzar?'<span class="tag am">DEBE CAMBIAR NOMBRE</span>':''}${x.aviso?'<span class="tag">AVISO PENDIENTE</span>':''}${x.cancion?`<p class="mut">♪ ${esc(x.cancion)}</p><a class="btn grn" style="min-height:44px;margin-top:6px" href="https://open.spotify.com/search/${encodeURIComponent(x.cancion)}" target="_blank" rel="noopener">Buscar en Spotify</a>`:''}
+<button class="btn amber" data-n="${esc(x.id)}" style="margin-top:8px;min-height:44px">Obligar a cambiar nombre</button><button class="btn b" data-a="${esc(x.id)}" style="margin-top:8px;min-height:44px">Enviar aviso</button><button class="btn dng" data-d="${esc(x.id)}" style="margin-top:8px;min-height:44px">Eliminar</button></div>`).join('')||'<p class="mut">Sin resultados.</p>'}`;
+$('#sq').oninput=e=>{mq=e.target.value.toLowerCase();mdraw();const s=$('#sq');s.focus();s.setSelectionRange(99,99)};
+$$('[data-f]').forEach(b=>b.onclick=()=>{mf=b.dataset.f;mdraw()});
+$('#gs').onclick=async()=>{const t=$('#gn').value.trim();if(!t)return;$('#gs').textContent='Enviando...';await mapi({action:'setNotice',text:t}).catch(()=>{});$('#gn').value='';mrefresh()};
+if($('#gc2'))$('#gc2').onclick=async()=>{await mapi({action:'clearNotice'}).catch(()=>{});mrefresh()};
+$('#gp').onclick=()=>conf('¿Estás seguro?','Se mostrará el podio con el ranking actual a todos los invitados que abran la invitación.','Sí, lanzar podio',async()=>{await mapi({action:'launchPodium'}).catch(()=>{});mrefresh()});
+if($('#gx'))$('#gx').onclick=()=>conf('¿Estás seguro?','Los invitados que aún no lo hayan visto ya no lo verán, y se cerrará a quienes lo tengan abierto.','Sí, dejar de mostrarlo',async()=>{await mapi({action:'clearPodium'}).catch(()=>{});mrefresh()});
+$$('[data-n]').forEach(b=>b.onclick=()=>{const x=G.find(y=>y.id===b.dataset.n);conf('¿Estás seguro?',`A <b>${esc(x.nombre)}</b> le saldrá una advertencia que no podrá cerrar hasta que cambie su nombre.`,'Sí, obligar',async()=>{await mapi({action:'forceRename',id:x.id}).catch(()=>{});x.forzar=true;mdraw()})});
+$$('[data-a]').forEach(b=>b.onclick=()=>{const x=G.find(y=>y.id===b.dataset.a);mdl(`<div class="px" style="font-size:10px;text-align:center;color:var(--sky)">Aviso para ${esc(x.nombre)}</div><textarea id="at" rows="3" maxlength="300" placeholder="Escribe el mensaje" style="margin-top:12px"></textarea><button class="btn" id="as">Enviar aviso</button>`);$('#as').onclick=async()=>{const t=$('#at').value.trim();if(!t)return;await mapi({action:'sendAviso',id:x.id,text:t}).catch(()=>{});cls();x.aviso=t;mdraw()}});
+$$('[data-d]').forEach(b=>b.onclick=()=>{const x=G.find(y=>y.id===b.dataset.d);conf('Eliminar invitado',`¿Eliminar a <b>${esc(x.nombre)}</b>?`,'Sí, continuar',()=>conf('Confirmación final','Se borrará de Google Sheets. No se puede deshacer.','Eliminar definitivamente',async()=>{try{const r=await mapi({action:'deleteGuest',id:x.id});if(r.ok)MP.guests=MP.guests.filter(y=>y.id!==x.id)}catch(e){}mdraw()}))});
+}
+
+if(isAdmin)admin();else if(isMod)mod();else{swing();guest()}
 </script></body></html>
